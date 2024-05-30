@@ -12,7 +12,7 @@ struct Pokemon: Decodable, Hashable {
 
 struct PokemonList: Decodable, Hashable {
     var count: Int
-    var next: String
+    var next: String?
     var previous: String?
     var results: [Pokemon]
 }

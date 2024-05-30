@@ -8,18 +8,31 @@
 import SwiftUI
 
 class PokemonListViewModel: ObservableObject {
-    var sdkManager: PokemonSDKManagerProtocol
+    @Published var pokemonData: [Pokemon]? = []
+    @Published var isLoading = false
+    var currentOffset = 0
+    let pageSize = 20
     
-    init(sdkManager: PokemonSDKManagerProtocol = PokemonSDKManager.shared) {
+    var apiManager: APIManagerProtocol
+    init(apiManager: APIManagerProtocol = APIManager.shared) {
         
-        self.sdkManager = sdkManager
+        self.apiManager = apiManager
     }
     
-    func fetchPokemonList(completion: @escaping (Bool) -> Void) {
+    func fetchPokemonList() {
         
-        self.sdkManager.fetchPokemonList { result in
+        isLoading = true
+        self.apiManager.fetchPokemonList(offset: currentOffset, limit: pageSize) { responseData in
             
-            completion(result)
+            self.currentOffset = self.currentOffset + self.pageSize
+            let results = responseData?.results ?? [Pokemon(name: "", url: "")]
+            self.pokemonData?.append(contentsOf: results)
+            self.isLoading = false
+            
+        } Fail: { err, statusCode in
+            
+            print("err: \(String(describing: err))")
+            print("statusCode: \(String(describing: statusCode))")
         }
     }
 }

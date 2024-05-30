@@ -12,19 +12,35 @@ struct PokemonListView: View {
     
     var body: some View {
         VStack {
-            Button {
+            List(viewModel.pokemonData ?? [Pokemon(name: "", url: "")], id: \.self) { item in
                 
-                viewModel.fetchPokemonList { result in
-                    
-                    // ..
+                VStack {
+                    Text(item.name)
+                        .onAppear {
+                            if item == viewModel.pokemonData?.last {
+                                
+                                viewModel.fetchPokemonList()
+                            }
+                        }
                 }
-            } label: {
-                Text("Pokemon")
             }
-
             
         }
         .padding()
+        .onAppear {
+            
+            viewModel.fetchPokemonList()
+        }
+        .overlay(
+            Group {
+                if viewModel.isLoading {
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                        .scaleEffect(0.7)
+                        .padding()
+                }
+            }, alignment: .bottom
+        )
     }
 }
 
