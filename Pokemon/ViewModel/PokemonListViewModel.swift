@@ -28,11 +28,14 @@ class PokemonListViewModel: ObservableObject {
             let results = responseData?.results ?? [Pokemon(name: "", url: "")]
             self.pokemonData?.append(contentsOf: results)
             self.isLoading = false
-            
         } Fail: { err, statusCode in
             
             print("err: \(String(describing: err))")
             print("statusCode: \(String(describing: statusCode))")
         }
+    }
+    
+    func formatNumber(_ number: Int) -> String {
+        return String(format: "%04d", number)
     }
 }

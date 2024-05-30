@@ -11,22 +11,38 @@ struct PokemonListView: View {
     @StateObject var viewModel = PokemonListViewModel()
     
     var body: some View {
-        VStack {
-            List(viewModel.pokemonData ?? [Pokemon(name: "", url: "")], id: \.self) { item in
-                
-                VStack {
-                    Text(item.name)
-                        .onAppear {
-                            if item == viewModel.pokemonData?.last {
+        
+        NavigationView {
+            VStack {
+                List {
+                    ForEach((viewModel.pokemonData ?? [Pokemon(name: "", url: "")]).indices, id: \.self) { index in
+                        NavigationLink(destination: PokemonDetailView()) {
+                            
+                            let data = viewModel.pokemonData?[index] ?? Pokemon(name: "", url: "")
+                            let imageURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(index+1).png"
+                            HStack {
                                 
-                                viewModel.fetchPokemonList()
+                                AsyncImageView(url: imageURL)
+                                    .frame(width: 70, height: 70)
+                                
+                                VStack(alignment: .leading) {
+                                    Text(viewModel.formatNumber(index + 1))
+                                    Text(data.name)
+                                        .onAppear {
+                                            if index == (viewModel.pokemonData?.count ?? 0) - 1 {
+                                                
+                                                viewModel.fetchPokemonList()
+                                            }
+                                        }
+                                }
                             }
                         }
+                    }
                 }
+                .listStyle(.plain)
             }
-            
+            .navigationTitle("Pokemon")
         }
-        .padding()
         .onAppear {
             
             viewModel.fetchPokemonList()
