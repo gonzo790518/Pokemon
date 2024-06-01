@@ -15,26 +15,43 @@ struct PokemonListView: View {
         NavigationView {
             VStack {
                 List {
-                    ForEach((viewModel.pokemonData ?? [Pokemon(name: "", url: "")]).indices, id: \.self) { index in
+                    ForEach(viewModel.pokemonData.indices, id: \.self) { index in
                         NavigationLink(destination: PokemonDetailView()) {
                             
-                            let data = viewModel.pokemonData?[index] ?? Pokemon(name: "", url: "")
-                            let imageURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(index+1).png"
+                            let pokemonId = index + 1
+                            let item = viewModel.pokemonData[index]
+                            let imageURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(pokemonId).png"
                             HStack {
                                 
                                 AsyncImageView(url: imageURL)
                                     .frame(width: 70, height: 70)
                                 
                                 VStack(alignment: .leading) {
-                                    Text(viewModel.formatNumber(index + 1))
-                                    Text(data.name)
+
+                                    Text(viewModel.formatNumber(item.id))
+                                    Text(item.name)
                                         .onAppear {
-                                            if index == (viewModel.pokemonData?.count ?? 0) - 1 {
+                                            if index == viewModel.pokemonData.count - 1 {
                                                 
                                                 viewModel.fetchPokemonList()
                                             }
                                         }
                                 }
+                                
+                                Spacer()
+                                
+                                Button {
+                                    
+                                    viewModel.setFavorite(for: item)
+                                } label: {
+                                    
+                                    Image(viewModel.isFavorite(for: item) ? "favorite" : "notFavorite")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                        .scaledToFit()
+                                        .padding(.trailing, 10)
+                                }
+                                .buttonStyle(PlainButtonStyle())
                             }
                         }
                     }

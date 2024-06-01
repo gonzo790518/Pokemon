@@ -11,7 +11,7 @@ struct AsyncImageView: View {
     @StateObject private var loader: ImageLoader
     private let placeholder: Image
 
-    init(url: String, placeholder: Image = Image(systemName: "pokeball")) {
+    init(url: String, placeholder: Image = Image("pokeball")) {
         _loader = StateObject(wrappedValue: ImageLoader(url: url))
         self.placeholder = placeholder
     }
