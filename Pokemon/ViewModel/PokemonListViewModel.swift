@@ -10,6 +10,7 @@ import SwiftUI
 class PokemonListViewModel: ObservableObject {
     @Published var pokemonData: [Pokemon]
     @Published var isLoading = false
+    @Published var isFiltered = false
     var currentOffset = 0
     let pageSize = 20
     private var pokemonID: Int = 0

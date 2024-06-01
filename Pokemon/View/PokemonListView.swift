@@ -14,51 +14,62 @@ struct PokemonListView: View {
         
         NavigationView {
             VStack {
-                List {
-                    ForEach(viewModel.pokemonData.indices, id: \.self) { index in
-                        NavigationLink(destination: PokemonDetailView()) {
+                List(viewModel.pokemonData.filter({ viewModel.isFiltered ? $0.isFavorite == viewModel.isFiltered : true}), id: \.self) { item in
+                                        
+                    NavigationLink(destination: PokemonDetailView()) {
+                        
+                        let imageURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(item.id).png"
+                        HStack {
                             
-                            let pokemonId = index + 1
-                            let item = viewModel.pokemonData[index]
-                            let imageURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(pokemonId).png"
-                            HStack {
+                            AsyncImageView(url: imageURL)
+                                .frame(width: 70, height: 70)
+                            
+                            VStack(alignment: .leading) {
                                 
-                                AsyncImageView(url: imageURL)
-                                    .frame(width: 70, height: 70)
-                                
-                                VStack(alignment: .leading) {
-
-                                    Text(viewModel.formatNumber(item.id))
-                                    Text(item.name)
-                                        .onAppear {
-                                            if index == viewModel.pokemonData.count - 1 {
-                                                
-                                                viewModel.fetchPokemonList()
-                                            }
+                                Text(viewModel.formatNumber(item.id))
+                                Text(item.name)
+                                    .onAppear {
+                                        if item.id == viewModel.pokemonData.count - 1 {
+                                            
+                                            viewModel.fetchPokemonList()
                                         }
-                                }
-                                
-                                Spacer()
-                                
-                                Button {
-                                    
-                                    viewModel.setFavorite(for: item)
-                                } label: {
-                                    
-                                    Image(viewModel.isFavorite(for: item) ? "favorite" : "notFavorite")
-                                        .resizable()
-                                        .frame(width: 20, height: 20)
-                                        .scaledToFit()
-                                        .padding(.trailing, 10)
-                                }
-                                .buttonStyle(PlainButtonStyle())
+                                    }
                             }
+                            
+                            Spacer()
+                            
+                            Button {
+                                
+                                viewModel.setFavorite(for: item)
+                            } label: {
+                                
+                                Image(viewModel.isFavorite(for: item) ? "favorite" : "notFavorite")
+                                    .resizable()
+                                    .frame(width: 20, height: 20)
+                                    .scaledToFit()
+                                    .padding(.trailing, 10)
+                            }
+                            .buttonStyle(PlainButtonStyle())
                         }
                     }
                 }
                 .listStyle(.plain)
             }
             .navigationTitle("Pokemon")
+            .toolbar {
+                
+                Button {
+                    
+                    viewModel.isFiltered.toggle()
+                } label: {
+                    
+                    Image(viewModel.isFiltered ? "filtered" : "filter")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .scaledToFit()
+                        .padding(.trailing, 10)
+                }
+            }
         }
         .onAppear {
             
