@@ -11,8 +11,9 @@ class PokemonListViewModel: ObservableObject {
     @Published var pokemonData: [Pokemon]
     @Published var isLoading = false
     @Published var isFiltered = false
+    @Published var types: [String] = []
     var currentOffset = 0
-    let pageSize = 20
+    let pageSize = 50
     private var pokemonID: Int = 0
     
     var apiManager: APIManagerProtocol
@@ -29,7 +30,7 @@ class PokemonListViewModel: ObservableObject {
         self.apiManager.fetchPokemonList(offset: currentOffset, limit: pageSize) { responseData in
             
             self.currentOffset = self.currentOffset + self.pageSize
-            let results = responseData?.results ?? [Pokemon(id: 0, name: "", url: "")]
+            let results = responseData?.results ?? [Pokemon(id: 0, name: "", url: "", types: "")]
             self.pokemonData.append(contentsOf: results)
             
             // Set id & isFavorite
@@ -41,14 +42,24 @@ class PokemonListViewModel: ObservableObject {
                 let isFavorite = self.isFavorite(for: self.pokemonData[index])
                 self.pokemonData[index].isFavorite = isFavorite
                 
-                if index == results.count - 1 {
-                    self.isLoading = false
+                self.apiManager.fetchPokemonType(url: self.pokemonData[index].url) { responseData in
+                    
+                    let types = responseData?.types.map { $0.type.name } ?? []
+                    self.pokemonData[index].types = types.joined(separator: ", ")
+                    
+                    if index == results.count - 1 {
+                        self.isLoading = false
+                    }
+                } Fail: { err, statusCode in
+                    
+                    print("[Fetch Types] err: \(String(describing: err))")
+                    print("[Fetch Types] statusCode: \(String(describing: statusCode))")
                 }
             }
         } Fail: { err, statusCode in
             
-            print("err: \(String(describing: err))")
-            print("statusCode: \(String(describing: statusCode))")
+            print("[Fetch Pokemon List] err: \(String(describing: err))")
+            print("[Fetch Pokemon List] statusCode: \(String(describing: statusCode))")
         }
     }
     

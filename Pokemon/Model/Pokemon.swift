@@ -10,18 +10,19 @@ struct Pokemon: Identifiable, Decodable, Hashable {
     var name: String
     var url: String
     var isFavorite: Bool
+    var types: String
     
-    init(id: Int = -1, name: String, url: String, isFavorite: Bool = false) {
+    init(id: Int = -1, name: String, url: String, isFavorite: Bool = false, types: String) {
         self.id = id
         self.name = name
         self.url = url
         self.isFavorite = isFavorite
+        self.types = types
     }
     
     private enum CodingKeys: String, CodingKey {
         case name
         case url
-        case isFavorite
     }
     
     init(from decoder: Decoder) throws {
@@ -30,6 +31,7 @@ struct Pokemon: Identifiable, Decodable, Hashable {
         self.url = try container.decode(String.self, forKey: .url)
         self.isFavorite = false
         self.id = -1
+        self.types = ""
     }
 }
 
@@ -38,4 +40,19 @@ struct PokemonList: Decodable, Hashable {
     var next: String?
     var previous: String?
     var results: [Pokemon]
+}
+
+
+struct PokemonType: Decodable {
+    let slot: Int
+    let type: TypeDetail
+}
+
+struct TypeDetail: Decodable {
+    let name: String
+    let url: String
+}
+
+struct PokemonDetail: Decodable {
+    let types: [PokemonType]
 }

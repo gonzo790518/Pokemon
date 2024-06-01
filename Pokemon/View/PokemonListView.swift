@@ -29,11 +29,12 @@ struct PokemonListView: View {
                                 Text(viewModel.formatNumber(item.id))
                                 Text(item.name)
                                     .onAppear {
-                                        if item.id == viewModel.pokemonData.count - 1 {
+                                        if item.id == viewModel.pokemonData.count - 5 {
                                             
                                             viewModel.fetchPokemonList()
                                         }
                                     }
+                                Text("\(item.types)")
                             }
                             
                             Spacer()
