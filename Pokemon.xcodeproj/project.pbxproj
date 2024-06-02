@@ -20,6 +20,7 @@
 		2362DAFD2C0B7FFF0008523D /* PokemonDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2362DAFC2C0B7FFF0008523D /* PokemonDetail.swift */; };
 		2362DAFF2C0B801A0008523D /* PokemonDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2362DAFE2C0B801A0008523D /* PokemonDetailViewModel.swift */; };
 		2362DB012C0C8FA90008523D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2362DB002C0C8FA90008523D /* Extension.swift */; };
+		2362DB032C0C96060008523D /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2362DB022C0C96060008523D /* General.swift */; };
 		2362F4922C060E4F00CB9F5F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 2362F4912C060E4F00CB9F5F /* Alamofire */; };
 		2362F4942C060E4F00CB9F5F /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 2362F4932C060E4F00CB9F5F /* AlamofireDynamic */; };
 		2362F4962C060E7600CB9F5F /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 2362F4952C060E7600CB9F5F /* ProgressHUD */; };
@@ -62,6 +63,7 @@
 		2362DAFC2C0B7FFF0008523D /* PokemonDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetail.swift; sourceTree = "<group>"; };
 		2362DAFE2C0B801A0008523D /* PokemonDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailViewModel.swift; sourceTree = "<group>"; };
 		2362DB002C0C8FA90008523D /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		2362DB022C0C96060008523D /* General.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
 		2362F4982C060EB500CB9F5F /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		2362F49A2C0610C100CB9F5F /* PokemonListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListViewModel.swift; sourceTree = "<group>"; };
 		2362F49C2C061D2700CB9F5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			children = (
 				231828EE2C08B3EF00C754A4 /* AsyncImageView.swift */,
 				2362DB002C0C8FA90008523D /* Extension.swift */,
+				2362DB022C0C96060008523D /* General.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2318188B2C06039F006FE008 /* PokemonListView.swift in Sources */,
+				2362DB032C0C96060008523D /* General.swift in Sources */,
 				2362F4992C060EB500CB9F5F /* Pokemon.swift in Sources */,
 				2362DAFD2C0B7FFF0008523D /* PokemonDetail.swift in Sources */,
 				231818B72C060772006FE008 /* PokemonManager.swift in Sources */,
@@ -514,7 +518,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Pokemon/Preview Content\"";
-				DEVELOPMENT_TEAM = S9PBHPN687;
+				DEVELOPMENT_TEAM = M4YJNDBT75;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -527,7 +531,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gonzoli.Pokemon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chtsecurity.cyphercom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -547,7 +551,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Pokemon/Preview Content\"";
-				DEVELOPMENT_TEAM = S9PBHPN687;
+				DEVELOPMENT_TEAM = M4YJNDBT75;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -560,7 +564,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.gonzoli.Pokemon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chtsecurity.cyphercom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

@@ -25,7 +25,7 @@ struct PokemonListView: View {
                         
                         VStack(alignment: .leading) {
                             
-                            Text(viewModel.formatNumber(item.id))
+                            Text(General.shared.formatNumber(item.id))
                             Text(item.name)
                                 .onAppear {
                                     if item.id == viewModel.pokemonData.count - 5 {
@@ -53,8 +53,6 @@ struct PokemonListView: View {
                         
                         if let index = viewModel.pokemonData.firstIndex(where: { $0.id == item.id }) {
                             
-                            print("selectedPokemon isFavorite: \(viewModel.selectedPokemon.isFavorite)")
-                            print("viewModel.pokemonData[index] isFavorite: \(viewModel.pokemonData[index].isFavorite)")
                             viewModel.selectedPokemon = viewModel.pokemonData[index]
                             isDetailPresented = true
                         }

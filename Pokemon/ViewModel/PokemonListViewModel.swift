@@ -64,11 +64,6 @@ class PokemonListViewModel: ObservableObject {
         }
     }
     
-    func formatNumber(_ number: Int) -> String {
-        
-        return String(format: "%04d", number)
-    }
-    
     func setFavorite(for item: Pokemon) {
         
         if let index = pokemonData.firstIndex(where: { $0.id == item.id }) {

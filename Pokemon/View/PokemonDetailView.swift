@@ -8,13 +8,50 @@
 import SwiftUI
 
 struct PokemonDetailView: View {
+    @StateObject var viewModel = PokemonDetailViewModel()
     @Binding var pokemon: Pokemon
-
+    
     var body: some View {
-        
-        VStack {
-            Text(pokemon.name)
-            Text("\(pokemon.isFavorite)")
+        VStack(alignment: .center) {
+            
+            let imageURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/\(pokemon.id).png"
+            AsyncImageView(url: imageURL)
+                .frame(width: 250, height: 250)
+            
+            ScrollView {
+                VStack(alignment: .leading) {
+                    Group {
+                        HStack {
+                            Text("ID: ")
+                                .font(.headline)
+                            Text(General.shared.formatNumber(pokemon.id))
+                        }
+                        
+                        HStack {
+                            Text("Name: ")
+                                .font(.headline)
+                            Text(pokemon.name)
+                        }
+                        
+                        HStack {
+                            Text("Types: ")
+                                .font(.headline)
+                            Text(pokemon.types)
+                        }
+                    }
+                    .padding(.bottom, 5)
+                    
+                    Text("Description: ")
+                        .font(.headline)
+                    Text(viewModel.getFlavorTextWithLocale())
+                }
+                Spacer()
+            }
+            .padding(.horizontal, 20)
+        }
+        .padding(.top, -80)
+        .onAppear {
+            viewModel.fetchPokemonDetail(id: pokemon.id)
         }
         .toolbar {
             
