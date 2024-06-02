@@ -12,6 +12,7 @@ class PokemonListViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var isFiltered = false
     @Published var types: [String] = []
+    @Published var selectedPokemon: Pokemon = Pokemon(name: "", url: "", types: "")
     var currentOffset = 0
     let pageSize = 50
     private var pokemonID: Int = 0
@@ -74,6 +75,7 @@ class PokemonListViewModel: ObservableObject {
             
             pokemonData[index].isFavorite.toggle()
             UserDefaults.standard.set(pokemonData[index].isFavorite, forKey: "\(item.id)")
+            NotificationCenter.default.post(name: .favoriteChanged, object: nil)
         }
     }
     

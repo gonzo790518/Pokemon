@@ -8,11 +8,29 @@
 import SwiftUI
 
 struct PokemonDetailView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+    @Binding var pokemon: Pokemon
 
-#Preview {
-    PokemonDetailView()
+    var body: some View {
+        
+        VStack {
+            Text(pokemon.name)
+            Text("\(pokemon.isFavorite)")
+        }
+        .toolbar {
+            
+            Button {
+                
+                pokemon.isFavorite.toggle()
+                UserDefaults.standard.set(pokemon.isFavorite, forKey: "\(pokemon.id)")
+                NotificationCenter.default.post(name: .favoriteChanged, object: nil)
+            } label: {
+                
+                Image(pokemon.isFavorite ? "favorite" : "notFavorite")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                    .scaledToFit()
+                    .padding(.trailing, 10)
+            }
+        }
+    }
 }
