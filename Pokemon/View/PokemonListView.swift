@@ -63,8 +63,19 @@ struct PokemonListView: View {
                 .listStyle(.plain)
             }
             .navigationTitle("Pokemon")
-            .onReceive(NotificationCenter.default.publisher(for: .favoriteChanged)) { _ in
+            .onReceive(NotificationCenter.default.publisher(for: .favoriteChanged)) { obj in
                 
+                // Update from the second or more detail view. (Evolution Chain)
+                if let pokemonID = obj.userInfo?["pokemonID"] as? Int, pokemonID != viewModel.selectedPokemon.id {
+                    
+                    let isFavorite = UserDefaults.standard.bool(forKey: "\(pokemonID)")
+                    if let index = viewModel.pokemonData.firstIndex(where: { $0.id == pokemonID }) {
+                        
+                        viewModel.pokemonData[index].isFavorite = isFavorite
+                    }
+                }
+                
+                // Update from the first detail view.
                 let isFavorite = viewModel.isFavorite(for: viewModel.selectedPokemon)
                 viewModel.selectedPokemon.isFavorite = isFavorite
                 if let index = viewModel.pokemonData.firstIndex(where: { $0.id == viewModel.selectedPokemon.id }) {
@@ -100,6 +111,7 @@ struct PokemonListView: View {
         .overlay(
             Group {
                 if viewModel.isLoading {
+                    
                     ProgressView()
                         .progressViewStyle(.circular)
                         .scaleEffect(0.7)

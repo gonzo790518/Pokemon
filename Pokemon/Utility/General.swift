@@ -19,6 +19,7 @@ class General {
         
         let pattern = "/\(keyword)/(\\d+)/"
         do {
+            
             let regex = try NSRegularExpression(pattern: pattern)
             let nsString = urlString as NSString
             let results = regex.matches(in: urlString, range: NSRange(location: 0, length: nsString.length))
@@ -28,6 +29,7 @@ class General {
                 return nsString.substring(with: range)
             }
         } catch let error {
+            
             print("Invalid regex: \(error.localizedDescription)")
         }
         

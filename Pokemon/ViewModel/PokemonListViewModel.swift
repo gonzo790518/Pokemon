@@ -31,7 +31,6 @@ class PokemonListViewModel: ObservableObject {
             self.currentOffset = self.currentOffset + self.pageSize
             let results = responseData?.results ?? [Pokemon(id: 0, name: "", url: "", types: "")]
             self.pokemonData.append(contentsOf: results)
-                        
             
             // Set id & isFavorite
             for index in self.pokemonData.indices {

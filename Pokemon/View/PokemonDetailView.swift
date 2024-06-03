@@ -22,6 +22,7 @@ struct PokemonDetailView: View {
             
             ScrollView {
                 VStack(alignment: .leading) {
+                    
                     Group {
                         HStack {
                             Text("ID: ").font(.headline)
@@ -50,6 +51,7 @@ struct PokemonDetailView: View {
                                         viewModel.setNextPokemon(item: item)
                                         isDetailPresented = true
                                     } label: {
+                                        
                                         Text(item.name)
                                     }
                                     .disabled(item.id == pokemon.id)
@@ -88,7 +90,9 @@ struct PokemonDetailView: View {
                 
                 pokemon.isFavorite.toggle()
                 UserDefaults.standard.set(pokemon.isFavorite, forKey: "\(pokemon.id)")
-                NotificationCenter.default.post(name: .favoriteChanged, object: nil)
+                
+                let userInfo: [AnyHashable : Any] = ["pokemonID": pokemon.id]
+                NotificationCenter.default.post(name: .favoriteChanged, object: nil, userInfo: userInfo)
             } label: {
                 
                 Image(pokemon.isFavorite ? "favorite" : "notFavorite")
