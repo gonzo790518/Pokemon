@@ -34,7 +34,6 @@ class PokemonListViewModel: ObservableObject {
                         
             
             // Set id & isFavorite
-            // "https://pokeapi.co/api/v2/pokemon/10001/"
             for index in self.pokemonData.indices {
                 
                 if let pokemonID = General.shared.extractID(keyword: "pokemon", from: self.pokemonData[index].url) {

@@ -22,7 +22,6 @@
 		2362DB012C0C8FA90008523D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2362DB002C0C8FA90008523D /* Extension.swift */; };
 		2362DB032C0C96060008523D /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2362DB022C0C96060008523D /* General.swift */; };
 		2362F4922C060E4F00CB9F5F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 2362F4912C060E4F00CB9F5F /* Alamofire */; };
-		2362F4962C060E7600CB9F5F /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 2362F4952C060E7600CB9F5F /* ProgressHUD */; };
 		2362F4992C060EB500CB9F5F /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2362F4982C060EB500CB9F5F /* Pokemon.swift */; };
 		2362F49B2C0610C100CB9F5F /* PokemonListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2362F49A2C0610C100CB9F5F /* PokemonListViewModel.swift */; };
 		23E903422C0DE91E00B4D415 /* EvolutionChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E903412C0DE91E00B4D415 /* EvolutionChain.swift */; };
@@ -75,7 +74,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2362F4962C060E7600CB9F5F /* ProgressHUD in Frameworks */,
 				2362F4922C060E4F00CB9F5F /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -223,7 +221,6 @@
 			name = Pokemon;
 			packageProductDependencies = (
 				2362F4912C060E4F00CB9F5F /* Alamofire */,
-				2362F4952C060E7600CB9F5F /* ProgressHUD */,
 			);
 			productName = Pokemon;
 			productReference = 231818852C06039F006FE008 /* Pokemon.app */;
@@ -299,7 +296,6 @@
 			mainGroup = 2318187C2C06039F006FE008;
 			packageReferences = (
 				231818B32C060551006FE008 /* XCRemoteSwiftPackageReference "Alamofire" */,
-				231818B42C06056F006FE008 /* XCRemoteSwiftPackageReference "ProgressHUD" */,
 			);
 			productRefGroup = 231818862C06039F006FE008 /* Products */;
 			projectDirPath = "";
@@ -699,14 +695,6 @@
 				minimumVersion = 5.9.1;
 			};
 		};
-		231818B42C06056F006FE008 /* XCRemoteSwiftPackageReference "ProgressHUD" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/relatedcode/ProgressHUD.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 14.1.3;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -714,11 +702,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 231818B32C060551006FE008 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		2362F4952C060E7600CB9F5F /* ProgressHUD */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 231818B42C06056F006FE008 /* XCRemoteSwiftPackageReference "ProgressHUD" */;
-			productName = ProgressHUD;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
