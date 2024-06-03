@@ -25,6 +25,7 @@
 		2362F4992C060EB500CB9F5F /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2362F4982C060EB500CB9F5F /* Pokemon.swift */; };
 		2362F49B2C0610C100CB9F5F /* PokemonListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2362F49A2C0610C100CB9F5F /* PokemonListViewModel.swift */; };
 		23E903422C0DE91E00B4D415 /* EvolutionChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E903412C0DE91E00B4D415 /* EvolutionChain.swift */; };
+		23E903482C0E358800B4D415 /* MockPokemonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E903472C0E358800B4D415 /* MockPokemonManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		2362F49A2C0610C100CB9F5F /* PokemonListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonListViewModel.swift; sourceTree = "<group>"; };
 		2362F49C2C061D2700CB9F5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		23E903412C0DE91E00B4D415 /* EvolutionChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvolutionChain.swift; sourceTree = "<group>"; };
+		23E903472C0E358800B4D415 /* MockPokemonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPokemonManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				231818B62C060772006FE008 /* PokemonManager.swift */,
+				23E903472C0E358800B4D415 /* MockPokemonManager.swift */,
 			);
 			path = APIManager;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 				2318188B2C06039F006FE008 /* PokemonListView.swift in Sources */,
 				2362DB032C0C96060008523D /* General.swift in Sources */,
 				2362F4992C060EB500CB9F5F /* Pokemon.swift in Sources */,
+				23E903482C0E358800B4D415 /* MockPokemonManager.swift in Sources */,
 				2362DAFD2C0B7FFF0008523D /* PokemonDetail.swift in Sources */,
 				231818B72C060772006FE008 /* PokemonManager.swift in Sources */,
 				2362F49B2C0610C100CB9F5F /* PokemonListViewModel.swift in Sources */,

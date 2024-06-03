@@ -38,23 +38,25 @@ struct PokemonDetailView: View {
                             Text(pokemon.types)
                         }
                         
-                        Text("Evolution Chain: ")
-                            .font(.headline)
-                        HStack {
-                            ForEach(viewModel.pokemonChain, id: \.self) {
-                                
-                                let item = $0
-                                Button {
+                        if viewModel.pokemonChain.count > 1 {
+                            Text("Evolution Chain: ")
+                                .font(.headline)
+                            HStack {
+                                ForEach(viewModel.pokemonChain, id: \.self) {
                                     
-                                    viewModel.setNextPokemon(item: item)
-                                    isDetailPresented = true
-                                } label: {
-                                    Text(item.name)
+                                    let item = $0
+                                    Button {
+                                        
+                                        viewModel.setNextPokemon(item: item)
+                                        isDetailPresented = true
+                                    } label: {
+                                        Text(item.name)
+                                    }
+                                    .disabled(item.id == pokemon.id)
+                                    
+                                    Text("->")
+                                        .opacity(item.id == viewModel.pokemonChain.last?.id ? 0 : 1)
                                 }
-                                .disabled(item.id == pokemon.id)
-                                
-                                Text("->")
-                                    .opacity(item.id == viewModel.pokemonChain.last?.id ? 0 : 1)
                             }
                         }
                     }
