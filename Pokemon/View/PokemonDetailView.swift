@@ -77,6 +77,8 @@ struct PokemonDetailView: View {
                 isTheFirstTime = true
                 viewModel.fetchPokemonDetail(id: pokemon.id)
             }
+            
+            viewModel.fetchTypesIfLack(id: pokemon.id)
         }
         .toolbar {
             

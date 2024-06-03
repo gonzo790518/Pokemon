@@ -11,6 +11,7 @@ class PokemonDetailViewModel: ObservableObject {
     @Published var pokemonSpecies: PokemonSpecies = PokemonSpecies(evolutionChain: EvolutionChain(url: ""), flavorTextEntries: [])
     @Published var pokemonChain: [Species] = []
     @Published var nextPokemon: Pokemon = Pokemon(name: "", url: "", types: "")
+    @Published var types: String = ""
     
     var apiManager: APIManagerProtocol
     init(apiManager: APIManagerProtocol = APIManager.shared) {
@@ -101,6 +102,20 @@ class PokemonDetailViewModel: ObservableObject {
         nextPokemon.name = item.name
         nextPokemon.url = item.url
         nextPokemon.isFavorite = isFavorite
-        nextPokemon.types = "" // TODO: Should get types
+        nextPokemon.types = self.types
+    }
+    
+    func fetchTypesIfLack(id: Int) {
+        
+        let url = "https://pokeapi.co/api/v2/pokemon/\(id)/"
+        self.apiManager.fetchPokemonType(url: url) { responseData in
+            
+            let types = responseData?.types.map { $0.type.name } ?? []
+            self.types = types.joined(separator: ", ")
+        } Fail: { err, statusCode in
+            
+            print("[Fetch Types] err: \(String(describing: err))")
+            print("[Fetch Types] statusCode: \(String(describing: statusCode))")
+        }
     }
 }
