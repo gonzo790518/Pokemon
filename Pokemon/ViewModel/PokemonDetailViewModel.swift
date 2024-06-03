@@ -24,7 +24,7 @@ class PokemonDetailViewModel: ObservableObject {
             if let response = responseData {
                 self.pokemonSpecies = response
             }
-            print("evolutionChain: \(responseData?.evolutionChain)")
+            print("evolutionChain: \(String(describing: responseData?.evolutionChain))")
         } Fail: { err, statusCode in
             
             print("[Fetch Detail] err: \(String(describing: err))")

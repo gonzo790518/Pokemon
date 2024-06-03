@@ -22,35 +22,42 @@ struct PokemonDetailView: View {
                 VStack(alignment: .leading) {
                     Group {
                         HStack {
-                            Text("ID: ")
-                                .font(.headline)
+                            Text("ID: ").font(.headline)
                             Text(General.shared.formatNumber(pokemon.id))
                         }
                         
                         HStack {
-                            Text("Name: ")
-                                .font(.headline)
+                            Text("Name: ").font(.headline)
                             Text(pokemon.name)
                         }
                         
                         HStack {
-                            Text("Types: ")
-                                .font(.headline)
+                            Text("Types: ").font(.headline)
                             Text(pokemon.types)
                         }
                     }
                     .padding(.bottom, 5)
                     
-                    Text("Description: ")
-                        .font(.headline)
-                    Text(viewModel.getFlavorTextWithLocale())
+                    if !viewModel.pokemonSpecies.flavorTextEntries.isEmpty {
+                        
+                        Text("Description: ").font(.headline)
+                        Text(viewModel.getFlavorTextWithLocale())
+                    }
+                    
+                    NavigationLink {
+                        
+                        PokemonEvolutionChainView()
+                    } label: {
+                        
+                        Text("Evolution Chain Pokemon").font(.headline)
+                    }.padding(.top, 5)
                 }
                 Spacer()
             }
             .padding(.horizontal, 20)
         }
-        .padding(.top, -80)
         .onAppear {
+            
             viewModel.fetchPokemonDetail(id: pokemon.id)
         }
         .toolbar {

@@ -15,7 +15,6 @@ class PokemonListViewModel: ObservableObject {
     @Published var selectedPokemon: Pokemon = Pokemon(name: "", url: "", types: "")
     var currentOffset = 0
     let pageSize = 50
-    private var pokemonID: Int = 0
     
     var apiManager: APIManagerProtocol
     init(apiManager: APIManagerProtocol = APIManager.shared) {
@@ -27,18 +26,21 @@ class PokemonListViewModel: ObservableObject {
     func fetchPokemonList() {
         
         isLoading = true
-        pokemonID = 0
         self.apiManager.fetchPokemonList(offset: currentOffset, limit: pageSize) { responseData in
             
             self.currentOffset = self.currentOffset + self.pageSize
             let results = responseData?.results ?? [Pokemon(id: 0, name: "", url: "", types: "")]
             self.pokemonData.append(contentsOf: results)
+                        
             
             // Set id & isFavorite
+            // "https://pokeapi.co/api/v2/pokemon/10001/"
             for index in self.pokemonData.indices {
                 
-                self.pokemonData[index].id = self.pokemonID + 1 // Set start id to 1.
-                self.pokemonID += 1
+                if let pokemonID = General.shared.extractID(from: self.pokemonData[index].url) {
+                    
+                    self.pokemonData[index].id = Int(pokemonID) ?? 0
+                }
                 
                 let isFavorite = self.isFavorite(for: self.pokemonData[index])
                 self.pokemonData[index].isFavorite = isFavorite

@@ -28,7 +28,8 @@ struct PokemonListView: View {
                             Text(General.shared.formatNumber(item.id))
                             Text(item.name)
                                 .onAppear {
-                                    if item.id == viewModel.pokemonData.count - 5 {
+                                    
+                                    if item == viewModel.pokemonData.last {
                                         
                                         viewModel.fetchPokemonList()
                                     }
