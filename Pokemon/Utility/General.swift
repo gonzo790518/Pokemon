@@ -15,9 +15,9 @@ class General {
         return String(format: "%04d", number)
     }
     
-    func extractID(from urlString: String) -> String? {
+    func extractID(keyword: String, from urlString: String) -> String? {
         
-        let pattern = "/pokemon/(\\d+)/"
+        let pattern = "/\(keyword)/(\\d+)/"
         do {
             let regex = try NSRegularExpression(pattern: pattern)
             let nsString = urlString as NSString

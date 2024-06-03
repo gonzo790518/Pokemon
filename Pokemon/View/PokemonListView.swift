@@ -87,11 +87,11 @@ struct PokemonListView: View {
                 }
             }
             .background (
-                NavigationLink(destination: PokemonDetailView(pokemon: $viewModel.selectedPokemon), isActive: $isDetailPresented) {
+                
+                NavigationLink(destination: PokemonDetailView(pokemon: viewModel.selectedPokemon), isActive: $isDetailPresented) {
                     EmptyView()
                 }.opacity(0)
             )
-            
         }
         .onAppear {
             

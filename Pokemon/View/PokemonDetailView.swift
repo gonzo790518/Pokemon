@@ -9,7 +9,9 @@ import SwiftUI
 
 struct PokemonDetailView: View {
     @StateObject var viewModel = PokemonDetailViewModel()
-    @Binding var pokemon: Pokemon
+    @State var pokemon: Pokemon
+    @State private var isDetailPresented = false
+    @State var isTheFirstTime: Bool = false
     
     var body: some View {
         VStack(alignment: .center) {
@@ -35,6 +37,26 @@ struct PokemonDetailView: View {
                             Text("Types: ").font(.headline)
                             Text(pokemon.types)
                         }
+                        
+                        Text("Evolution Chain: ")
+                            .font(.headline)
+                        HStack {
+                            ForEach(viewModel.pokemonChain, id: \.self) {
+                                
+                                let item = $0
+                                Button {
+                                    
+                                    viewModel.setNextPokemon(item: item)
+                                    isDetailPresented = true
+                                } label: {
+                                    Text(item.name)
+                                }
+                                .disabled(item.id == pokemon.id)
+                                
+                                Text("->")
+                                    .opacity(item.id == viewModel.pokemonChain.last?.id ? 0 : 1)
+                            }
+                        }
                     }
                     .padding(.bottom, 5)
                     
@@ -43,14 +65,6 @@ struct PokemonDetailView: View {
                         Text("Description: ").font(.headline)
                         Text(viewModel.getFlavorTextWithLocale())
                     }
-                    
-                    NavigationLink {
-                        
-                        PokemonEvolutionChainView()
-                    } label: {
-                        
-                        Text("Evolution Chain Pokemon").font(.headline)
-                    }.padding(.top, 5)
                 }
                 Spacer()
             }
@@ -58,7 +72,11 @@ struct PokemonDetailView: View {
         }
         .onAppear {
             
-            viewModel.fetchPokemonDetail(id: pokemon.id)
+            if !isTheFirstTime {
+                
+                isTheFirstTime = true
+                viewModel.fetchPokemonDetail(id: pokemon.id)
+            }
         }
         .toolbar {
             
@@ -76,5 +94,11 @@ struct PokemonDetailView: View {
                     .padding(.trailing, 10)
             }
         }
+        .background (
+            
+            NavigationLink(destination: PokemonDetailView(pokemon: viewModel.nextPokemon), isActive: $isDetailPresented) {
+                EmptyView()
+            }.opacity(0)
+        )
     }
 }
