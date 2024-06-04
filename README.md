@@ -1,6 +1,6 @@
 # Pokemon
 
-This is my coding test instructions of Gogolook. It's about Pokemon. 
+This is my coding test of Gogolook. It's about Pokemon. 
 When you run the Pokemon project, you can see Pokemon list and detail. 
 Just have fun to try it.
 
